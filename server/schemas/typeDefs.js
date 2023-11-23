@@ -3,20 +3,21 @@ const typeDefs = `
     _id: ID!
     email: String!
     habits: [Habit]
-    createdAt: String!
+    createdAt: String
   }
 
   type Habit {
     _id: ID!
-    description: String!
     title: String!
-    createdAt: String!
-    tallyCount: Int!
+    description: String
+    increase_decrease: Boolean
+    createdAt: String
+    tallyCount: Int
     tally: [Tally]
   }
 
   type Tally {
-    _id: ID!
+    _id: ID
     createdAt: String!
   }
 
@@ -31,7 +32,7 @@ const typeDefs = `
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(email: String!, password: String!): Auth
   }
 `;
 

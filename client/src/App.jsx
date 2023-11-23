@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import {
@@ -35,9 +36,10 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [status, setStatus] = useState;
   return (
     <ApolloProvider client={client}>
-      <Header />
+      <Header status={status} />
       <Outlet />
     </ApolloProvider>
   );

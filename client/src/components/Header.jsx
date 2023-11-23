@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-
-export default function Header() {
+import Auth from "../utils/auth";
+export default function Header({ status }) {
+  const [loggedIn, setStatus] = useState(Auth.loggedIn());
+  useEffect(() => {
+    setStatus(status);
+  }, [status]);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
+      <h1>loggedIn status: {JSON.stringify(loggedIn)}</h1>
       <Container>
         <Navbar.Brand as={Link} to="/">
           React-Bootstrap

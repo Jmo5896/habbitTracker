@@ -2,12 +2,23 @@ const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 const habitSchema = new Schema(
   {
+    title: {
+      type: String,
+      required: "You need to give your habit a name",
+      minlength: 1,
+      maxlength: 50,
+      trim: true,
+    },
     description: {
       type: String,
-      required: "You need to leave a description!",
+      required: "You need to give your habit a description!",
       minlength: 1,
       maxlength: 280,
       trim: true,
+    },
+    increase_decrease: {
+      // true = increase, false = decrease
+      type: Boolean,
     },
     createdAt: {
       type: Date,
