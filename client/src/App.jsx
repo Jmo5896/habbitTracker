@@ -10,6 +10,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import Header from "./components/Header";
+import UserProvider from "./utils/Context";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -36,11 +37,12 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [status, setStatus] = useState;
   return (
     <ApolloProvider client={client}>
-      <Header status={status} />
-      <Outlet />
+      <UserProvider>
+        <Header />
+        <Outlet />
+      </UserProvider>
     </ApolloProvider>
   );
 }

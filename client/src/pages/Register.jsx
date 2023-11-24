@@ -5,8 +5,8 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { useNavigate } from "react-router-dom";
-
-function Login() {
+import { useUserContext } from "../utils/Context";
+function Register() {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -14,6 +14,8 @@ function Login() {
   if (error) {
     console.log(JSON.stringify(error));
   }
+
+  const { setStatus } = useUserContext();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -26,35 +28,38 @@ function Login() {
       },
     });
     // console.log(data.addUser.token);
-    Auth.login(data.addUser.token, navigate);
+    Auth.login(data.addUser.token, navigate, setStatus);
   };
 
   return (
-    <Form onSubmit={handleFormSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          ref={emailRef}
-          name="email"
-          type="email"
-          placeholder="Enter email"
-        />
-      </Form.Group>
+    <>
+      <h1>Register</h1>
+      <Form onSubmit={handleFormSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            ref={emailRef}
+            name="email"
+            type="email"
+            placeholder="Enter email"
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          ref={passwordRef}
-          name="password"
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            ref={passwordRef}
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </>
   );
 }
 
-export default Login;
+export default Register;
