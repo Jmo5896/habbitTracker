@@ -3,6 +3,7 @@ const typeDefs = `
     _id: ID!
     email: String!
     habits: [Habit]
+    admin: Boolean
     createdAt: String
   }
 

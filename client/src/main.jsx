@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import Admin from "./pages/Admin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
     ],
   },

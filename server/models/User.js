@@ -18,6 +18,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  admin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   habits: [
     {
       type: Schema.Types.ObjectId,

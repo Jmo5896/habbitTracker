@@ -19,6 +19,7 @@ class AuthService {
   isTokenExpired(token) {
     try {
       const decoded = decode(token);
+      // console.log(decoded);
       if (decoded.exp < Date.now() / 1000) {
         return true;
       } else return false;
@@ -30,6 +31,12 @@ class AuthService {
   getToken() {
     // Retrieves the user token from localStorage
     return localStorage.getItem("id_token");
+  }
+
+  isAdmin() {
+    const currentToken = decode(localStorage.getItem("id_token"));
+    // console.log(currentToken);
+    return currentToken.data.admin || false;
   }
 
   login(idToken, navigate, setStatus) {

@@ -7,7 +7,7 @@ import Auth from "../utils/auth";
 import { useUserContext } from "../utils/Context";
 export default function Header() {
   const [loggedIn, setLoggedIn] = useState(Auth.loggedIn());
-  const { status, setStatus } = useUserContext();
+  const { status, setStatus, admin } = useUserContext();
   const navigate = useNavigate();
   useEffect(() => {
     setLoggedIn(status);
@@ -30,6 +30,11 @@ export default function Header() {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
+            {admin && (
+              <Nav.Link as={Link} to="/admin">
+                Admin
+              </Nav.Link>
+            )}
             {loggedIn ? (
               <>
                 <Nav.Link as={Link} to="/dashboard">
