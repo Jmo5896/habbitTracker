@@ -23,17 +23,12 @@ const userSchema = new Schema({
     required: true,
     default: false,
   },
-  habits: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Habit",
-    },
-  ],
   createdAt: {
     type: Date,
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
+  characters: [{ type: ObjectId, ref: "Character" }],
 });
 
 // hash user password
