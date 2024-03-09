@@ -17,47 +17,271 @@ const characterSchema = new Schema(
     proficiency_bonus: {
       type: Number,
     },
-    // ABILITIES
-    strength: [
-      {
-        type: Number,
+    level: {
+      type: Number,
+    },
+    abilities: {
+      strength: [
+        {
+          type: Number,
+        },
+      ],
+      dexterity: [
+        {
+          type: Number,
+        },
+      ],
+      constitution: [
+        {
+          type: Number,
+        },
+      ],
+      intelligence: [
+        {
+          type: Number,
+        },
+      ],
+      wisdom: [
+        {
+          type: Number,
+        },
+      ],
+      charisma: [
+        {
+          type: Number,
+        },
+      ],
+    },
+    skills: {
+      Acrobatics: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-    ],
-    dexterity: [
-      {
-        type: Number,
+      "Animal Handling": {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-    ],
-    constitution: [
-      {
-        type: Number,
+      Arcana: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-    ],
-    intelligence: [
-      {
-        type: Number,
+      Athletics: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-    ],
-    wisdom: [
-      {
-        type: Number,
+      Deception: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-    ],
-    charisma: [
-      {
-        type: Number,
+      History: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-    ],
-    //  SKILLS
-    acrobatics: {
-      proficient: {
-        type: Boolean,
+      Insight: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-      expertise: {
-        type: Boolean,
+      Intimidation: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
-      bonus: {
-        type: Number,
+      Investigation: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Medicine: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Nature: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Perception: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Performance: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Persuasion: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Religion: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      "Sleight of Hand": {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Stealth: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+      Survival: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
+      },
+    },
+    savingThrows: {
+      strength: {
+        proficient: {
+          type: Boolean,
+        },
+        expertise: {
+          type: Boolean,
+        },
+        additional: {
+          type: Number,
+          default: 0,
+        },
       },
     },
   },
@@ -67,47 +291,96 @@ const characterSchema = new Schema(
     },
   }
 );
+// STAT VIRTUALS
+characterSchema.virtual("myScores").get(function () {
+  return Object.entries(this.abilities).map(([score, list]) => {
+    const stat = list.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
 
-characterSchema.virtual("strength score").get(function () {
-  return this.strength.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
+    return {
+      [`${score}Score`]: stat,
+      [`${score}Modifier`]: Math.floor((stat - 10) / 2),
+    };
+  });
 });
 
-characterSchema.virtual("dexterity score").get(function () {
-  return this.dexterity.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
+// SKILL VIRTUALS
+characterSchema.virtual("mySkills").get(function () {
+  const skills = {};
+  Object.entries(this.skills).forEach(([skill, obj]) => {
+    let total = obj.additional;
+    if (obj.proficient) {
+      if (obj.expertise) {
+        total += this.proficiency_bonus;
+      }
+      total += this.proficiency_bonus;
+    }
+    let bonus = "";
+    if (skill === "Athletics") {
+      bonus = "strength";
+    } else if (
+      skill === "Acrobatics" ||
+      skill === "Sleight of Hand" ||
+      skill === "Stealth"
+    ) {
+      bonus = "dexterity";
+    } else if (
+      skill === "Arcana" ||
+      skill === "History" ||
+      skill === "Investigation" ||
+      skill === "Nature" ||
+      skill === "Religion"
+    ) {
+      bonus = "intelligence";
+    } else if (
+      skill === "Animal Handling" ||
+      skill === "Insight" ||
+      skill === "Medicine" ||
+      skill === "Perception" ||
+      skill === "Survival"
+    ) {
+      bonus = "wisdom";
+    } else if (
+      skill === "Deception" ||
+      skill === "Intimidation" ||
+      skill === "Performance" ||
+      skill === "Persuasion"
+    ) {
+      bonus = "charisma";
+    }
+    const stat = this.abilities[bonus].reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+
+    total += Math.floor((stat - 10) / 2);
+
+    skills[`${skill}Bonus`] = total;
+    skills[`${skill}Passive`] = total + 10;
+  });
+  return skills;
 });
 
-characterSchema.virtual("constitution score").get(function () {
-  return this.constitution.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
-});
-
-characterSchema.virtual("intelligence score").get(function () {
-  return this.intelligence.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
-});
-
-characterSchema.virtual("wisdom score").get(function () {
-  return this.wisdom.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
-});
-
-characterSchema.virtual("charisma score").get(function () {
-  return this.charisma.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
-  );
+characterSchema.virtual("mySavingThrows").get(function () {
+  const data = {};
+  Object.entries(this.savingThrows).forEach(([score, obj]) => {
+    let total = obj.additional;
+    if (obj.proficient) {
+      if (obj.expertise) {
+        total += this.proficiency_bonus;
+      }
+      total += this.proficiency_bonus;
+    }
+    const stat = this.abilities[bonus].reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      0
+    );
+    total += Math.floor((stat - 10) / 2);
+    data[score] = total;
+  });
+  return data;
 });
 
 const Character = model("Character", characterSchema);
