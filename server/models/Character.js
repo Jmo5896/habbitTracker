@@ -13,14 +13,18 @@ const characterSchema = new Schema(
     description: {
       type: String,
     },
-    proficiency_bonus: {
-      type: Number,
-    },
-    level: {
-      type: Number,
-    },
-    class: { type: Schema.Types.ObjectId, ref: "Class" },
-    subClass: { type: Schema.Types.ObjectId, ref: "SubClass" },
+    class: [
+      {
+        class: {
+          type: Schema.Types.ObjectId,
+          ref: "Class",
+        },
+        classLevel: {
+          type: Number,
+        },
+      },
+    ],
+    subClass: [{ type: Schema.Types.ObjectId, ref: "SubClass" }],
     race: raceSchema,
     abilities: abilitiesSchema,
     skills: skillsSchema,
@@ -56,6 +60,24 @@ const characterSchema = new Schema(
     },
   }
 );
+
+// CHARACTER LEVEL
+characterSchema.virtual("characterLevel").get(function () {
+  const levels = this.class.map((obj) => obj.classLevel);
+  return levels.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  );
+});
+
+//  PROFICIENCY BONUS
+characterSchema.virtual("proficiencyBonus").get(function () {
+  const currentLevel = this.class
+    .map((obj) => obj.classLevel)
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  return Math.ceil(currentLevel / 4 + 1);
+});
+
 // ATTUNEMENT COUNT
 // characterSchema.virtual("attunementCount").get(function () {
 //   return this.magicItems.filter((obj) => obj.attunement.attuned).length;
