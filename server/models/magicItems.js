@@ -5,6 +5,10 @@ const magicItemSchema = new Schema({
     type: String,
     required: true,
   },
+  quantity: {
+    type: Number,
+    default: 1,
+  },
   attunement: {
     needAttunemnet: {
       type: Boolean,
@@ -16,21 +20,8 @@ const magicItemSchema = new Schema({
     },
   },
   value: {
-    pp: {
-      type: Number,
-    },
-    gp: {
-      type: Number,
-    },
-    ep: {
-      type: Number,
-    },
-    sp: {
-      type: Number,
-    },
-    cp: {
-      type: Number,
-    },
+    // this will always be in gold
+    type: Number,
   },
   weight: {
     type: Number,

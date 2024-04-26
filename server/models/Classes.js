@@ -8,6 +8,10 @@ const classSchema = new Schema({
   //   features index should relate to the character level
   features: [
     {
+      name: {
+        type: String,
+        required: true,
+      },
       actionType: {
         // action, bonus action, reaction, or static (permanent buff)
         type: String,
@@ -22,6 +26,11 @@ const classSchema = new Schema({
         type: String,
         required: true,
       },
+      featureLevel: [
+        {
+          type: Number,
+        },
+      ],
     },
   ],
 });

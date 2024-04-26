@@ -34,9 +34,10 @@ class AuthService {
   }
 
   isAdmin() {
-    const currentToken = decode(localStorage.getItem("id_token"));
-    // console.log(currentToken);
-    return currentToken.data.admin || false;
+    const currentToken =
+      localStorage.getItem("id_token") &&
+      decode(localStorage.getItem("id_token"));
+    return currentToken ? currentToken.data.admin : false;
   }
 
   login(idToken, navigate, setStatus) {

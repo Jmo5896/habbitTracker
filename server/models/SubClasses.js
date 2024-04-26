@@ -5,12 +5,7 @@ const subClassSchema = new Schema({
     type: String,
     required: true,
   },
-  //   the index of feature levels will corelate with the features index
-  feautureLevels: [
-    {
-      type: Number,
-    },
-  ],
+
   features: [
     {
       actionType: {
@@ -26,6 +21,9 @@ const subClassSchema = new Schema({
       description: {
         type: String,
         required: true,
+      },
+      feautureLevels: {
+        type: Number,
       },
     },
   ],

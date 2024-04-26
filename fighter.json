@@ -1,0 +1,84 @@
+{
+    "class": {
+        "name": "Fighter",
+        "features": [
+            {
+                "name": "Fighting Style",
+                "actionType": "Static",
+                "description": "You adopt a particular style of fighting as your specialty. Choose one of the following options. You can't take a Fighting Style option more than once, even if you later get to choose again.",
+                "duration": 1,
+                "featureLevel": [
+                    1
+                ]
+            },
+            {
+                "name": "Second Wind",
+                "actionType": "Bonus Action",
+                "description": "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d 10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.",
+                "duration": 1,
+                "featureLevel": [
+                    1
+                ]
+            },
+            {
+                "name": "Action Surge",
+                "actionType": "Free Action",
+                "description": "Starting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action. Once you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.",
+                "duration": 1,
+                "featureLevel": [
+                    2,
+                    17
+                ]
+            },
+            {
+                "name": "Martial Archetype",
+                "actionType": "Static",
+                "description": "At 3rd level, you choose an archetype that you strive to emulate in your com bat styles and techniques. Choose Champion, Battle Master, or Eldritch Knight, all detailed at the end of the class description. The archetype you choose grants you features at 3rd level and again at 7th, 10th, 15th, and 18th level.",
+                "duration": 1,
+                "featureLevel": [
+                    3,
+                    7,
+                    10,
+                    15,
+                    18
+                ]
+            },
+            {
+                "name": "Ability Score Improvement",
+                "actionType": "Static",
+                "description": "When you reach 4th level, and again at 6th, 8th, 12th, 14th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature.",
+                "duration": 1,
+                "featureLevel": [
+                    4,
+                    6,
+                    8,
+                    12,
+                    14,
+                    16,
+                    19
+                ]
+            },
+            {
+                "name": "Extra Attack",
+                "actionType": "Static",
+                "description": "Beginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn. The number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class.",
+                "duration": 1,
+                "featureLevel": [
+                    5,
+                    20
+                ]
+            },
+            {
+                "name": "Indomitable",
+                "actionType": "Free Action",
+                "description": "Beginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can't use this feature again until you finish a long rest. You can use this feature twice between long rests starting at 13th level and three times between long rests starting at 17th level.",
+                "duration": 1,
+                "featureLevel": [
+                    9,
+                    13,
+                    17
+                ]
+            }
+        ]
+    }
+}
